@@ -27,6 +27,10 @@ const isSpam = (msg) => {
     })
   }
 
+  if (msg.forward_from) {
+    spam = true
+  }
+
   return spam
 }
 
