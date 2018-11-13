@@ -46,7 +46,9 @@ const handleAsync = (msg) => {
       if (isNewFag) {
         const spam = isSpam(msg)
         if (spam) {
-          return await bot.restrictChatMember(msg.chat.id, msg.from.id, { until_date: -1, can_send_messages: false })
+          await bot.restrictChatMember(msg.chat.id, msg.from.id, { until_date: -1, can_send_messages: false })
+          await bot.deleteMessage(msg.chat.id, msg.message_id)
+          return
         }
         return await User.update({ telegram_id: msg.from.id }, { isNewFag: false })
       }
